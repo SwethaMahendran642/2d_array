@@ -1,0 +1,173 @@
+1) spiral Matrix II 
+
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int total = n*n;
+        int[][] result= new int[n][n];
+        int x=0;
+        int y=0;
+        int step = 0;
+        for(int i=0;i<total;)
+        {
+            while(y+step<n)
+            {
+                i++;
+                result[x][y]=i;
+                y++;
+            }
+            y--;
+            x++;
+            while(x+step<n)
+            {
+                i++;
+                result[x][y]=i;
+                x++;
+            }
+            x--;
+            y--;
+            while(y>=0+step)
+            {
+                i++;
+                result[x][y]=i;
+                y--;
+            }
+            y++;
+            x--;
+            step++;
+            while(x>=0+step)
+            {
+                i++;
+                result[x][y]=i;
+                x--;
+            }
+            x++;
+            y++;
+        }
+        return result;
+    
+    }
+}
+
+2)Richest Customer Wealth
+
+class Solution {
+    public int maximumWealth(int[][] nums) {
+        int sum = 0;
+
+        for(int i=0; i<nums.length; i++){
+            int temp_wealth = 0;
+            for(int j=0; j<nums[i].length; j++){
+                temp_wealth +=nums[i][j];
+            }
+            sum = Math.max(sum, temp_wealth);
+        }
+        return sum;
+    }
+}
+
+3)Toeplitz Matrix
+
+class Solution {
+    public boolean isToeplitzMatrix(int[][] matrix) {
+        for(int i=1; i<matrix.length; i++){
+            for(int j=1; j<matrix[0].length; j++){
+                if(matrix[i][j] != matrix[i-1][j-1])
+                    return false;
+            }
+        }
+        
+        return true;
+    }
+}
+
+4)Matrix Diagonal Sum
+
+class Solution {
+    public int diagonalSum(int[][] mat) {
+        int n = mat.length;
+        int sum = 0;
+        
+        for (int i = 0; i < n; i++) {
+            sum += mat[i][i]; // Add elements from the primary diagonal
+            
+            // Check if the current element is not part of the primary diagonal
+            if (i != n - 1 - i) {
+                sum += mat[i][n - 1 - i]; // Add elements from the secondary diagonal
+            }
+        }
+        
+        return sum;
+    }
+}
+
+5)Count Negative number in sorted matrix 
+
+class Solution {
+    public int countNegatives(int[][] grid) {
+        int count = 0;
+        int m = grid.length;
+        int n = grid[0].length;
+    
+        int row = 0;
+        int col = n - 1;
+    
+        while (row < m && col >= 0)
+        {
+            if (grid[row][col] < 0) 
+            {
+                count += m - row; // Add the remaining elements in the current column
+                col--;
+            } 
+            else 
+            {
+                row++;
+            }
+        }
+        return count;
+    }
+}
+
+7) Set Matrix Zeros
+
+class Pair
+{
+    int i,j;
+    Pair(int i, int j)
+    {
+        this.i = i;
+        this.j = j;
+    }
+}
+class Solution {
+    public void setZeroes(int[][] matrix) 
+    {
+       Queue<Pair> p = new LinkedList<>();
+       int n = matrix.length;
+       int m = matrix[0].length;
+       for(int i=0; i<n; i++)
+       {
+           for(int j=0; j<m; j++)
+           {
+               if(matrix[i][j]==0)
+               {
+                   p.add(new Pair(i,j));
+               }
+           }
+       } 
+       while(!p.isEmpty())
+       {
+           Pair a = p.poll();
+           int i1 = a.i;
+           int j1 = a.j;
+           for(int k=0;k<m;k++)
+           {
+               matrix[i1][k]=0;
+           }
+           for(int k=0;k<n;k++)
+           {
+               matrix[k][j1]=0;
+           }
+       }
+
+    }
+}
